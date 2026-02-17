@@ -1,249 +1,219 @@
 import { useState } from "react";
-import { useAuth } from "@/hooks/use-auth";
+import { motion, AnimatePresence } from "framer-motion";
 import { useEntries } from "@/hooks/use-entries";
 import { useI18n } from "@/hooks/use-i18n";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { insertEntrySchema } from "@shared/schema";
-import { z } from "zod";
-import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
-import { Textarea } from "@/components/ui/textarea";
-import { Calendar } from "@/components/ui/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Loader2, ChevronRight, ChevronLeft, Save } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
-import { format } from "date-fns";
-import { CalendarIcon, Loader2, Save } from "lucide-react";
 
-// Icons for mood
-import { Smile, Frown, Meh, Angry, Zap } from "lucide-react";
+const phases = [
+  { id: 'menstruation', range: 'Days 1–5', color: 'border-rose-400', bg: 'bg-rose-50' },
+  { id: 'follicular', range: 'Days 1–13', color: 'border-emerald-400', bg: 'bg-emerald-50' },
+  { id: 'ovulation', range: 'Around Day 14', color: 'border-amber-400', bg: 'bg-amber-50' },
+  { id: 'luteal', range: 'Days 15–28', color: 'border-purple-400', bg: 'bg-purple-50' }
+];
+
+const symptomList = [
+  "Cramps", "Headache", "Bloating", "Acne", "Breast Tenderness", 
+  "Mood Swings", "Fatigue", "Backache", "Nausea", "Insomnia"
+];
 
 export default function Tracking() {
-  const { user } = useAuth();
-  const { createEntry, isCreating } = useEntries();
   const { t } = useI18n();
-  const [date, setDate] = useState<Date | undefined>(new Date());
-
-  const form = useForm<z.infer<typeof insertEntrySchema>>({
-    resolver: zodResolver(insertEntrySchema),
-    defaultValues: {
-      date: format(new Date(), "yyyy-MM-dd"),
-      userId: user?.id,
-      mood: "Happy",
-      energy: 5,
-      painIntensity: 0,
-      stress: 0,
-      symptoms: [],
-      notes: ""
-    },
+  const { createEntry, isCreating } = useEntries();
+  const { toast } = useToast();
+  const [phaseIndex, setPhaseIndex] = useState(0);
+  
+  const [formData, setFormData] = useState({
+    painIntensity: 0,
+    mood: "Happy",
+    energy: 5,
+    sleep: 8,
+    stress: 0,
+    symptoms: [] as string[],
+    notes: ""
   });
 
-  const onSubmit = (data: z.infer<typeof insertEntrySchema>) => {
+  const currentPhase = phases[phaseIndex];
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
     createEntry({
-      ...data,
-      userId: user!.id,
-      date: date ? format(date, "yyyy-MM-dd") : format(new Date(), "yyyy-MM-dd"),
+      ...formData,
+      userId: 1, // Simulated
+      cyclePhase: currentPhase.id,
+      date: new Date().toISOString().split('T')[0],
+      flow: phaseIndex === 0 ? "Medium" : "None",
+      painType: "None"
+    }, {
+      onSuccess: () => {
+        toast({
+          title: "Entry Saved",
+          description: "Your daily biological data has been updated."
+        });
+      }
     });
   };
 
-  const moods = [
-    { label: "Happy", icon: Smile, color: "text-yellow-500 bg-yellow-100" },
-    { label: "Sad", icon: Frown, color: "text-blue-500 bg-blue-100" },
-    { label: "Irritable", icon: Angry, color: "text-red-500 bg-red-100" },
-    { label: "Neutral", icon: Meh, color: "text-gray-500 bg-gray-100" },
-    { label: "Energetic", icon: Zap, color: "text-purple-500 bg-purple-100" },
-  ];
-
-  const symptomsList = [
-    "Cramps", "Headache", "Bloating", "Acne", "Backache", "Fatigue", "Cravings", "Insomnia"
-  ];
-
   return (
-    <div className="max-w-3xl mx-auto">
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="font-display text-3xl font-bold">{t("tracking")}</h1>
-        
-        <Popover>
-          <PopoverTrigger asChild>
-            <Button
-              variant={"outline"}
-              className={cn(
-                "w-[240px] pl-3 text-left font-normal rounded-xl border-border bg-white",
-                !date && "text-muted-foreground"
-              )}
-            >
-              {date ? format(date, "PPP") : <span>Pick a date</span>}
-              <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="w-auto p-0" align="end">
-            <Calendar
-              mode="single"
-              selected={date}
-              onSelect={setDate}
-              disabled={(date) => date > new Date() || date < new Date("1900-01-01")}
-              initialFocus
-            />
-          </PopoverContent>
-        </Popover>
+    <div className="max-w-4xl mx-auto space-y-12 pb-20">
+      <div className="text-center space-y-2">
+        <h1 className="text-4xl font-display font-bold text-gradient">{t('tracking')}</h1>
+        <p className="text-muted-foreground">{t('mood')}</p>
       </div>
 
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      {/* Cycle Circle Visualizer */}
+      <div className="flex flex-col items-center justify-center space-y-8 py-10">
+        <div className="relative w-64 h-64 md:w-80 md:h-80 flex items-center justify-center">
+          {/* Background Ring */}
+          <div className="absolute inset-0 rounded-full border-8 border-muted/30" />
           
-          {/* Mood Section */}
-          <div className="glass-card p-6 rounded-2xl">
-            <h3 className="text-xl font-bold mb-4 font-display">{t("mood")}</h3>
-            <FormField
-              control={form.control}
-              name="mood"
-              render={({ field }) => (
-                <div className="flex flex-wrap gap-4">
-                  {moods.map((mood) => (
-                    <button
-                      key={mood.label}
-                      type="button"
-                      onClick={() => field.onChange(mood.label)}
-                      className={cn(
-                        "flex flex-col items-center gap-2 p-4 rounded-xl transition-all w-24",
-                        field.value === mood.label 
-                          ? "ring-2 ring-primary bg-white shadow-md transform scale-105" 
-                          : "hover:bg-white/50"
-                      )}
-                    >
-                      <div className={cn("w-10 h-10 rounded-full flex items-center justify-center", mood.color)}>
-                        <mood.icon className="w-6 h-6" />
-                      </div>
-                      <span className="text-sm font-medium">{mood.label}</span>
-                    </button>
-                  ))}
-                </div>
-              )}
-            />
-          </div>
+          {/* Active Phase Ring Segment */}
+          <motion.div 
+            className={cn(
+              "absolute inset-0 rounded-full border-8 border-transparent border-t-current transition-colors duration-500",
+              currentPhase.color.replace('border-', 'text-')
+            )}
+            animate={{ rotate: phaseIndex * 90 }}
+            transition={{ type: "spring", stiffness: 100 }}
+          />
 
-          {/* Sliders Section */}
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="glass-card p-6 rounded-2xl">
-              <FormField
-                control={form.control}
-                name="energy"
-                render={({ field }) => (
-                  <FormItem>
-                    <div className="flex justify-between mb-4">
-                      <FormLabel className="text-lg font-medium">Energy Level</FormLabel>
-                      <span className="font-bold text-primary">{field.value}/10</span>
-                    </div>
-                    <FormControl>
-                      <Slider
-                        min={1}
-                        max={10}
-                        step={1}
-                        value={[field.value || 5]}
-                        onValueChange={(vals) => field.onChange(vals[0])}
-                        className="py-4"
-                      />
-                    </FormControl>
-                  </FormItem>
-                )}
+          {/* Central Phase Information */}
+          <AnimatePresence mode="wait">
+            <motion.div 
+              key={currentPhase.id}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              className={cn("text-center px-8 z-10 w-full h-full flex flex-col items-center justify-center rounded-full transition-colors duration-500", currentPhase.bg)}
+            >
+              <h2 className="text-2xl font-display font-bold text-primary">{t(currentPhase.id)}</h2>
+              <p className="text-sm font-medium text-muted-foreground mb-4">{currentPhase.range}</p>
+              <p className="text-xs leading-relaxed text-foreground/80 italic max-w-[200px]">
+                {t(`${currentPhase.id}_desc`)}
+              </p>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Controls */}
+          <div className="absolute -left-12 top-1/2 -translate-y-1/2 z-20">
+            <Button 
+              size="icon" 
+              variant="ghost" 
+              onClick={() => setPhaseIndex((p) => (p - 1 + phases.length) % phases.length)}
+              className="rounded-full hover:bg-primary/10"
+            >
+              <ChevronLeft className="w-8 h-8 text-primary" />
+            </Button>
+          </div>
+          <div className="absolute -right-12 top-1/2 -translate-y-1/2 z-20">
+            <Button 
+              size="icon" 
+              variant="ghost" 
+              onClick={() => setPhaseIndex((p) => (p + 1) % phases.length)}
+              className="rounded-full hover:bg-primary/10"
+            >
+              <ChevronRight className="w-8 h-8 text-primary" />
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      {/* Tracking Form */}
+      <Card className="glass-card p-8 rounded-3xl overflow-visible border-white/40 shadow-2xl shadow-primary/5">
+        <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          <div className="space-y-8">
+            <div className="space-y-4">
+              <div className="flex justify-between items-center">
+                <Label className="text-lg font-semibold">{t('pain')}</Label>
+                <span className="text-primary font-bold text-xl">{formData.painIntensity}</span>
+              </div>
+              <Slider 
+                value={[formData.painIntensity]} 
+                max={10} 
+                step={1}
+                onValueChange={([v]) => setFormData(prev => ({ ...prev, painIntensity: v }))}
+                className="py-4"
               />
             </div>
 
-            <div className="glass-card p-6 rounded-2xl">
-              <FormField
-                control={form.control}
-                name="stress"
-                render={({ field }) => (
-                  <FormItem>
-                    <div className="flex justify-between mb-4">
-                      <FormLabel className="text-lg font-medium">Stress Level</FormLabel>
-                      <span className="font-bold text-destructive">{field.value}/10</span>
-                    </div>
-                    <FormControl>
-                      <Slider
-                        min={1}
-                        max={10}
-                        step={1}
-                        value={[field.value || 0]}
-                        onValueChange={(vals) => field.onChange(vals[0])}
-                        className="py-4"
-                      />
-                    </FormControl>
-                  </FormItem>
-                )}
+            <div className="space-y-4">
+              <div className="flex justify-between items-center">
+                <Label className="text-lg font-semibold">{t('energy')}</Label>
+                <span className="text-primary font-bold text-xl">{formData.energy}</span>
+              </div>
+              <Slider 
+                value={[formData.energy]} 
+                max={10} 
+                step={1}
+                onValueChange={([v]) => setFormData(prev => ({ ...prev, energy: v }))}
+                className="py-4"
+              />
+            </div>
+
+            <div className="space-y-4">
+              <div className="flex justify-between items-center">
+                <Label className="text-lg font-semibold">{t('stress')}</Label>
+                <span className="text-primary font-bold text-xl">{formData.stress}</span>
+              </div>
+              <Slider 
+                value={[formData.stress]} 
+                max={10} 
+                step={1}
+                onValueChange={([v]) => setFormData(prev => ({ ...prev, stress: v }))}
+                className="py-4"
               />
             </div>
           </div>
 
-          {/* Symptoms Section */}
-          <div className="glass-card p-6 rounded-2xl">
-            <h3 className="text-xl font-bold mb-4 font-display">{t("symptoms")}</h3>
-            <FormField
-              control={form.control}
-              name="symptoms"
-              render={({ field }) => (
-                <div className="flex flex-wrap gap-3">
-                  {symptomsList.map((symptom) => {
-                    const isSelected = field.value?.includes(symptom);
-                    return (
-                      <button
-                        key={symptom}
-                        type="button"
-                        onClick={() => {
-                          const current = field.value || [];
-                          if (isSelected) {
-                            field.onChange(current.filter(s => s !== symptom));
-                          } else {
-                            field.onChange([...current, symptom]);
-                          }
-                        }}
-                        className={cn(
-                          "px-4 py-2 rounded-full text-sm font-medium transition-all border",
-                          isSelected 
-                            ? "bg-primary text-white border-primary shadow-md" 
-                            : "bg-white/50 text-foreground border-transparent hover:bg-white"
-                        )}
-                      >
-                        {symptom}
-                      </button>
-                    );
-                  })}
-                </div>
-              )}
-            />
-          </div>
-
-          {/* Notes Section */}
-          <div className="glass-card p-6 rounded-2xl">
-            <FormField
-              control={form.control}
-              name="notes"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-lg font-medium mb-2 block">Daily Notes</FormLabel>
-                  <FormControl>
-                    <Textarea 
-                      placeholder="How did your day go? Any specific observations?" 
-                      className="bg-white/50 border-none resize-none h-32 text-base rounded-xl focus:ring-1 focus:ring-primary"
-                      {...field}
+          <div className="space-y-8">
+            <div className="space-y-4">
+              <Label className="text-lg font-semibold block">{t('symptoms')}</Label>
+              <div className="grid grid-cols-2 gap-3">
+                {symptomList.map(s => (
+                  <div key={s} className="flex items-center space-x-3 p-3 rounded-xl bg-white/40 hover:bg-white/60 transition-colors border border-white/20">
+                    <Checkbox 
+                      id={s} 
+                      checked={formData.symptoms.includes(s)}
+                      onCheckedChange={(checked) => {
+                        setFormData(prev => ({
+                          ...prev,
+                          symptoms: checked 
+                            ? [...prev.symptoms, s]
+                            : prev.symptoms.filter(x => x !== s)
+                        }));
+                      }}
                     />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-          </div>
+                    <label htmlFor={s} className="text-sm font-medium leading-none cursor-pointer">
+                      {s}
+                    </label>
+                  </div>
+                ))}
+              </div>
+            </div>
 
-          <Button 
-            type="submit" 
-            disabled={isCreating}
-            className="w-full h-14 text-lg font-bold rounded-xl shadow-lg shadow-primary/25"
-          >
-            {isCreating ? <Loader2 className="mr-2 animate-spin" /> : <Save className="mr-2" />}
-            {t("save")}
-          </Button>
+            <Button 
+              type="submit" 
+              className="w-full h-14 rounded-2xl text-lg font-bold shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all"
+              disabled={isCreating}
+            >
+              {isCreating ? (
+                <Loader2 className="w-6 h-6 animate-spin" />
+              ) : (
+                <>
+                  <Save className="mr-2 w-5 h-5" />
+                  {t('save')}
+                </>
+              )}
+            </Button>
+          </div>
         </form>
-      </Form>
+      </Card>
     </div>
   );
 }

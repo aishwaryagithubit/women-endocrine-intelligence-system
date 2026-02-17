@@ -10,16 +10,12 @@ import { z } from "zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-
-const authSchema = z.object({
-  username: z.string().min(3, "Username must be at least 3 characters"),
-  password: z.string().min(6, "Password must be at least 6 characters"),
-  name: z.string().optional(),
-});
+import { useI18n } from "@/hooks/use-i18n";
 
 export default function Auth() {
   const [isLogin, setIsLogin] = useState(true);
   const { login, signup, isPending } = useAuth();
+  const { language } = useI18n();
   
   const form = useForm<z.infer<typeof authSchema>>({
     resolver: zodResolver(authSchema),
@@ -58,10 +54,12 @@ export default function Auth() {
             <Heart className="w-10 h-10 text-primary fill-primary" />
           </motion.div>
           <h1 className="font-display text-4xl md:text-5xl font-bold mb-4 text-foreground">
-            Endora
+            {language === 'en' ? 'Endora' : 'एन्डोरा'}
           </h1>
           <p className="text-muted-foreground text-lg">
-            Understand your body, empower your life. Cycle tracking, health insights, and community support designed for you.
+            {language === 'en' 
+              ? 'Understand your body, empower your life. Cycle tracking, health insights, and community support designed for you.'
+              : 'आफ्नो शरीरलाई बुझ्नुहोस्, आफ्नो जीवनलाई सशक्त बनाउनुहोस्। तपाईंको लागि डिजाइन गरिएको चक्र ट्र्याकिङ, स्वास्थ्य अन्तर्दृष्टि, र सामुदायिक समर्थन।'}
           </p>
         </div>
       </div>
