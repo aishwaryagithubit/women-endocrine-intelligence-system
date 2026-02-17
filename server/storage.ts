@@ -57,7 +57,21 @@ export class MemStorage implements IStorage {
 
   async createEntry(userId: number, insertEntry: InsertEntry): Promise<Entry> {
     const id = this.currentEntryId++;
-    const entry: Entry = { ...insertEntry, id, userId };
+    const entry: Entry = {
+      id,
+      userId,
+      date: insertEntry.date,
+      cyclePhase: insertEntry.cyclePhase ?? null,
+      flow: insertEntry.flow ?? null,
+      painType: insertEntry.painType ?? null,
+      painIntensity: insertEntry.painIntensity ?? null,
+      mood: insertEntry.mood ?? null,
+      energy: insertEntry.energy ?? null,
+      sleep: insertEntry.sleep ?? null,
+      stress: insertEntry.stress ?? null,
+      symptoms: insertEntry.symptoms ?? null,
+      notes: insertEntry.notes ?? null,
+    };
     this.entries.set(id, entry);
     return entry;
   }

@@ -12,6 +12,12 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useI18n } from "@/hooks/use-i18n";
 
+const authSchema = z.object({
+  username: z.string().min(3, "Username must be at least 3 characters"),
+  password: z.string().min(6, "Password must be at least 6 characters"),
+  name: z.string().optional(),
+});
+
 export default function Auth() {
   const [isLogin, setIsLogin] = useState(true);
   const { login, signup, isPending } = useAuth();

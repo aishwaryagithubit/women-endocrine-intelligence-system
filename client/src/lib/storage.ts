@@ -21,7 +21,7 @@ const setStorage = <T>(key: string, data: T[]) => {
 
 export const api = {
   auth: {
-    login: async (creds: { username: string }) => {
+    login: async (creds: { username: string; password?: string }) => {
       await delay(500);
       const users = getStorage<User>(USERS_KEY);
       const user = users.find(u => u.username === creds.username);
@@ -92,7 +92,21 @@ export const api = {
       const user = JSON.parse(session) as User;
       
       const entries = getStorage<Entry>(ENTRIES_KEY);
-      const newEntry: Entry = { ...entryData, id: Math.floor(Math.random() * 10000), userId: user.id };
+      const newEntry: Entry = {
+        id: Math.floor(Math.random() * 10000),
+        userId: user.id,
+        date: entryData.date,
+        cyclePhase: entryData.cyclePhase ?? null,
+        flow: entryData.flow ?? null,
+        painType: entryData.painType ?? null,
+        painIntensity: entryData.painIntensity ?? null,
+        mood: entryData.mood ?? null,
+        energy: entryData.energy ?? null,
+        sleep: entryData.sleep ?? null,
+        stress: entryData.stress ?? null,
+        symptoms: entryData.symptoms ?? null,
+        notes: entryData.notes ?? null,
+      };
       
       entries.push(newEntry);
       setStorage(ENTRIES_KEY, entries);
