@@ -92,7 +92,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 min-w-0 overflow-auto">
+      <main className="flex-1 min-w-0 flex flex-col">
         <div className="lg:hidden p-4 flex justify-between items-center glass-card m-4 rounded-xl sticky top-4 z-40">
           <div className="flex items-center gap-2">
             <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-primary to-purple-400"></div>
@@ -103,7 +103,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </button>
         </div>
         
-        <div className="p-4 lg:p-8 max-w-6xl mx-auto">
+        <div className="p-4 lg:p-8 max-w-6xl mx-auto flex-1 w-full">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -113,6 +113,25 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             {children}
           </motion.div>
         </div>
+
+        {/* Footer */}
+        <footer className="mt-auto border-t border-border/50 bg-white/30 backdrop-blur-sm py-8 px-6">
+          <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="flex items-center gap-2">
+              <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-primary to-purple-400"></div>
+              <span className="font-display font-bold text-lg">Endora</span>
+            </div>
+            
+            <p className="text-sm text-muted-foreground">
+              {t('footer_rights')}
+            </p>
+
+            <div className="flex gap-6 text-sm font-medium text-muted-foreground">
+              <a href="#" className="hover:text-primary transition-colors">{t('footer_privacy')}</a>
+              <a href="#" className="hover:text-primary transition-colors">{t('footer_terms')}</a>
+            </div>
+          </div>
+        </footer>
       </main>
     </div>
   );

@@ -43,6 +43,13 @@ const translations: Record<string, Record<Language, string>> = {
   'book_appointment': { en: 'Book Appointment', ne: 'अपोइन्टमेन्ट बुक गर्नुहोस्' },
   'logout': { en: 'Logout', ne: 'बाहिरिनुहोस्' },
   'language': { en: 'Language', ne: 'भाषा' },
+  'chat_title': { en: 'AI Health Assistant', ne: 'AI स्वास्थ्य सहायक' },
+  'chat_subtitle': { en: 'Get instant answers to your health questions.', ne: 'तपाईंका स्वास्थ्य प्रश्नहरूको तुरुन्त जवाफ पाउनुहोस्।' },
+  'chat_welcome': { en: "Hello! I'm Endora AI. Ask me anything about your cycle, symptoms, or sexual health. Note: I am an AI, not a doctor.", ne: "नमस्ते! म एन्डोरा AI हुँ। मलाई आफ्नो चक्र, लक्षण, वा यौन स्वास्थ्यको बारेमा केहि पनि सोध्नुहोस्। नोट: म एक AI हुँ, डाक्टर होइन।" },
+  'chat_response_default': { en: "That's a common question. Irregular cycles can be caused by stress, diet, or hormonal changes. If this persists for more than 3 cycles, it might be worth consulting a specialist.", ne: "यो एक सामान्य प्रश्न हो। अनियमित चक्र तनाव, आहार, वा हर्मोनल परिवर्तनहरूको कारण हुन सक्छ। यदि यो ३ चक्र भन्दा बढी समयसम्म रहिरह्यो भने, विशेषज्ञसँग परामर्श लिनु राम्रो हुन सक्छ।" },
+  'footer_rights': { en: '© 2026 Endora. All rights reserved.', ne: '© २०२६ एन्डोरा। सबै अधिकार सुरक्षित।' },
+  'footer_privacy': { en: 'Privacy Policy', ne: 'गोपनीयता नीति' },
+  'footer_terms': { en: 'Terms of Service', ne: 'सेवाका सर्तहरू' },
 };
 
 export const useI18n = create<I18nStore>((set, get) => ({

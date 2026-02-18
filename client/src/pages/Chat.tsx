@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Send, Bot, User as UserIcon, Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useI18n } from "@/hooks/use-i18n";
 
 interface Message {
   id: string;
@@ -12,16 +13,28 @@ interface Message {
 }
 
 export default function Chat() {
+  const { t } = useI18n();
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
-      text: "Hello! I'm Endora AI. Ask me anything about your cycle, symptoms, or sexual health. Note: I am an AI, not a doctor.",
+      text: t('chat_welcome'),
       sender: "bot",
       timestamp: Date.now()
     }
   ]);
+
+  // Update welcome message if language changes
+  useEffect(() => {
+    setMessages(prev => {
+      if (prev.length === 1 && prev[0].id === "1") {
+        return [{ ...prev[0], text: t('chat_welcome') }];
+      }
+      return prev;
+    });
+  }, [t]);
+
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -49,7 +62,7 @@ export default function Chat() {
     setTimeout(() => {
       const botMsg: Message = {
         id: (Date.now() + 1).toString(),
-        text: "That's a common question. Irregular cycles can be caused by stress, diet, or hormonal changes. If this persists for more than 3 cycles, it might be worth consulting a specialist.",
+        text: t('chat_response_default'),
         sender: 'bot',
         timestamp: Date.now()
       };
@@ -61,8 +74,8 @@ export default function Chat() {
   return (
     <div className="h-[calc(100vh-140px)] flex flex-col">
       <div className="mb-4">
-        <h1 className="font-display text-3xl font-bold">AI Health Assistant</h1>
-        <p className="text-muted-foreground">Get instant answers to your health questions.</p>
+        <h1 className="font-display text-3xl font-bold">{t('chat_title')}</h1>
+        <p className="text-muted-foreground">{t('chat_subtitle')}</p>
       </div>
 
       <div className="flex-1 glass-card rounded-2xl p-4 flex flex-col overflow-hidden">
@@ -104,7 +117,7 @@ export default function Chat() {
             <Input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask about symptoms, cycle..."
+              placeholder={t('chat_placeholder')}
               className="flex-1 rounded-xl border-border bg-white/50"
             />
             <Button 
