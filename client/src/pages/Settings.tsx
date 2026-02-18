@@ -8,13 +8,13 @@ import { motion } from "framer-motion";
 
 export default function Settings() {
   const { user, updateUser } = useAuth();
-  const { language, setLanguage } = useI18n();
+  const { t, language, setLanguage } = useI18n();
 
   if (!user) return null;
 
   return (
     <div className="max-w-2xl mx-auto">
-      <h1 className="font-display text-3xl font-bold mb-8">Settings</h1>
+      <h1 className="font-display text-3xl font-bold mb-8">{t('settings')}</h1>
 
       <div className="space-y-6">
         {/* Profile Section */}
@@ -23,14 +23,14 @@ export default function Settings() {
            animate={{ opacity: 1, y: 0 }}
            className="glass-card p-6 rounded-2xl"
         >
-          <h2 className="text-xl font-bold mb-6">Profile Details</h2>
+          <h2 className="text-xl font-bold mb-6">{t('profile_details')}</h2>
           <div className="space-y-4">
             <div>
-              <Label>Full Name</Label>
+              <Label>{t('full_name')}</Label>
               <Input value={user.name} disabled className="mt-2 bg-white/50" />
             </div>
             <div>
-              <Label>Email / Username</Label>
+              <Label>{t('email_username')}</Label>
               <Input value={user.username} disabled className="mt-2 bg-white/50" />
             </div>
           </div>
@@ -43,10 +43,10 @@ export default function Settings() {
            transition={{ delay: 0.1 }}
            className="glass-card p-6 rounded-2xl"
         >
-          <h2 className="text-xl font-bold mb-6">Cycle Configuration</h2>
+          <h2 className="text-xl font-bold mb-6">{t('cycle_config')}</h2>
           <div className="grid grid-cols-2 gap-6">
             <div>
-              <Label>Cycle Length (Days)</Label>
+              <Label>{t('cycle_length_days')}</Label>
               <Input 
                 type="number" 
                 defaultValue={user.cycleLength || 28}
@@ -55,7 +55,7 @@ export default function Settings() {
               />
             </div>
             <div>
-              <Label>Period Length (Days)</Label>
+              <Label>{t('period_length_days')}</Label>
               <Input 
                 type="number" 
                 defaultValue={user.periodLength || 5}
@@ -73,12 +73,12 @@ export default function Settings() {
            transition={{ delay: 0.2 }}
            className="glass-card p-6 rounded-2xl"
         >
-          <h2 className="text-xl font-bold mb-6">Preferences</h2>
+          <h2 className="text-xl font-bold mb-6">{t('preferences')}</h2>
           
           <div className="flex items-center justify-between mb-6">
             <div className="space-y-0.5">
-              <Label className="text-base">Language</Label>
-              <p className="text-sm text-muted-foreground">Switch between English and Nepali</p>
+              <Label className="text-base">{t('language')}</Label>
+              <p className="text-sm text-muted-foreground">{t('lang_desc')}</p>
             </div>
             <div className="flex items-center gap-2 bg-secondary/50 p-1 rounded-lg">
               <button 
@@ -98,8 +98,8 @@ export default function Settings() {
 
           <div className="flex items-center justify-between">
             <div className="space-y-0.5">
-              <Label className="text-base">Email Notifications</Label>
-              <p className="text-sm text-muted-foreground">Receive weekly health summaries</p>
+              <Label className="text-base">{t('email_notifications')}</Label>
+              <p className="text-sm text-muted-foreground">{t('notif_desc')}</p>
             </div>
             <Switch defaultChecked />
           </div>

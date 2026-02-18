@@ -19,20 +19,20 @@ export default function Dashboard() {
   const today = new Date();
   const cycleDay = (differenceInDays(today, lastPeriod) % (user.cycleLength || 28)) + 1;
   
-  let phase = "Follicular";
+  let phase = "follicular";
   let phaseColor = "text-pink-500";
   let phaseBg = "bg-pink-100";
   
   if (cycleDay <= (user.periodLength || 5)) {
-    phase = "Menstrual";
+    phase = "menstruation";
     phaseColor = "text-red-500";
     phaseBg = "bg-red-100";
   } else if (cycleDay >= 12 && cycleDay <= 16) {
-    phase = "Ovulation";
+    phase = "ovulation";
     phaseColor = "text-teal-500";
     phaseBg = "bg-teal-100";
   } else if (cycleDay > 16) {
-    phase = "Luteal";
+    phase = "luteal";
     phaseColor = "text-purple-500";
     phaseBg = "bg-purple-100";
   }
@@ -59,7 +59,7 @@ export default function Dashboard() {
           <h1 className="font-display text-4xl font-bold text-foreground">
             {t("welcome")}, {user.name}
           </h1>
-          <p className="text-muted-foreground mt-1">Here's your daily health overview.</p>
+          <p className="text-muted-foreground mt-1">{t('cycle_overview')}</p>
         </div>
         <Link href="/tracking">
           <button className="bg-foreground text-background px-6 py-3 rounded-xl font-medium shadow-lg hover:shadow-xl transition-all flex items-center gap-2">
@@ -82,14 +82,14 @@ export default function Dashboard() {
             <div className="flex justify-between items-start">
               <div>
                 <span className={`inline-block px-3 py-1 rounded-full text-sm font-bold bg-white/50 backdrop-blur-md mb-2 ${phaseColor}`}>
-                  {phase} Phase
+                  {t(phase)} {t('phase')}
                 </span>
-                <h2 className="text-5xl font-display font-bold text-foreground mb-2">Day {cycleDay}</h2>
-                <p className="text-muted-foreground">of {user.cycleLength} day cycle</p>
+                <h2 className="text-5xl font-display font-bold text-foreground mb-2">{t('day_of_cycle').replace('{{day}}', cycleDay.toString())}</h2>
+                <p className="text-muted-foreground">{t('day_of_cycle').replace('{{day}}', cycleDay.toString()).replace(cycleDay.toString(), '')} of {user.cycleLength} {t('days')} {t('cycle')}</p>
               </div>
               <div className="text-right">
-                <p className="text-sm font-medium text-muted-foreground uppercase tracking-wide">Next Period</p>
-                <p className="text-2xl font-bold text-foreground">{daysUntilPeriod} days</p>
+                <p className="text-sm font-medium text-muted-foreground uppercase tracking-wide">{t('next_period')}</p>
+                <p className="text-2xl font-bold text-foreground">{daysUntilPeriod} {t('days')}</p>
                 <p className="text-sm text-muted-foreground">{format(nextPeriodDate, "MMM d")}</p>
               </div>
             </div>
@@ -119,8 +119,8 @@ export default function Dashboard() {
               <Sun className="w-6 h-6" />
             </div>
             <div>
-              <p className="text-sm text-muted-foreground">Today's Prediction</p>
-              <p className="font-bold text-lg">High Energy</p>
+              <p className="text-sm text-muted-foreground">{t('today_prediction')}</p>
+              <p className="font-bold text-lg">{t('high_energy')}</p>
             </div>
           </motion.div>
 
@@ -134,8 +134,8 @@ export default function Dashboard() {
               <Droplet className="w-6 h-6" />
             </div>
             <div>
-              <p className="text-sm text-muted-foreground">Hydration Goal</p>
-              <p className="font-bold text-lg">4 / 8 Cups</p>
+              <p className="text-sm text-muted-foreground">{t('hydration_goal')}</p>
+              <p className="font-bold text-lg">4 / 8 {t('cups')}</p>
             </div>
           </motion.div>
           
@@ -149,8 +149,8 @@ export default function Dashboard() {
               <Moon className="w-6 h-6" />
             </div>
             <div>
-              <p className="text-sm text-muted-foreground">Sleep Quality</p>
-              <p className="font-bold text-lg">7.5 Hours</p>
+              <p className="text-sm text-muted-foreground">{t('sleep_quality')}</p>
+              <p className="font-bold text-lg">7.5 {t('hours')}</p>
             </div>
           </motion.div>
         </div>
@@ -164,10 +164,10 @@ export default function Dashboard() {
         className="glass-card p-8 rounded-3xl"
       >
         <div className="flex justify-between items-center mb-6">
-          <h3 className="font-display text-2xl font-bold">Mood & Energy Trends</h3>
+          <h3 className="font-display text-2xl font-bold">{t('mood_energy_trends')}</h3>
           <select className="bg-transparent border-none text-muted-foreground font-medium focus:ring-0">
-            <option>Last 30 Days</option>
-            <option>Last 3 Months</option>
+            <option>{t('last_30_days')}</option>
+            <option>{t('last_3_months')}</option>
           </select>
         </div>
         <div className="h-[300px] w-full">
@@ -206,9 +206,9 @@ export default function Dashboard() {
         >
           <div className="relative z-10 flex justify-between items-center">
             <div>
-              <h3 className="font-display text-2xl font-bold mb-2">Understand Your Body Better</h3>
+              <h3 className="font-display text-2xl font-bold mb-2">{t('understand_body_better')}</h3>
               <p className="text-white/90 max-w-lg">
-                Explore our library of medically-reviewed articles about cycle health, nutrition, and mental wellness.
+                {t('learning_promo_desc')}
               </p>
             </div>
             <div className="bg-white/20 p-3 rounded-full backdrop-blur-sm">
