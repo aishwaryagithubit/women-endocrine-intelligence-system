@@ -50,6 +50,15 @@ const translations: Record<string, Record<Language, string>> = {
   'footer_rights': { en: '© 2026 Endora. All rights reserved.', ne: '© २०२६ एन्डोरा। सबै अधिकार सुरक्षित।' },
   'footer_privacy': { en: 'Privacy Policy', ne: 'गोपनीयता नीति' },
   'footer_terms': { en: 'Terms of Service', ne: 'सेवाका सर्तहरू' },
+  'hsi_score': { en: 'HSI Score', ne: 'HSI स्कोर' },
+  'stable': { en: 'Stable', ne: 'स्थिर' },
+  'view_report': { en: 'View Report', ne: 'रिपोर्ट हेर्नुहोस्' },
+  'weekly_summary': { en: 'Weekly Summary', ne: 'साप्ताहिक सारांश' },
+  'stability': { en: 'Stability', ne: 'स्थिरता' },
+  'learning_progress_msg': { en: 'Progressed 2 lessons', ne: '२ पाठहरू पूरा भयो' },
+  'ai_analyzing': { en: 'AI Analyzing', ne: 'AI विश्लेषण गर्दै' },
+  'ai_analysis_desc': { en: 'Multi-variable modeling • Pattern recognition • Trend analysis', ne: 'बहु-चर मोडलिङ • ढाँचा पहिचान • प्रवृत्ति विश्लेषण' },
+  'day_of_cycle': { en: 'Day {{day}} of cycle', ne: 'चक्रको दिन {{day}}' },
 };
 
 export const useI18n = create<I18nStore>((set, get) => ({
