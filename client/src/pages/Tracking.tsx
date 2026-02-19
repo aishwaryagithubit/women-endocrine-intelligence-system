@@ -170,9 +170,9 @@ export default function Tracking() {
                 />
                 <defs>
                   <linearGradient id="hsiGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#f472b6" />
-                    <stop offset="50%" stopColor="#fbbf24" />
-                    <stop offset="100%" stopColor="#2dd4bf" />
+                    <stop offset="0%" stopColor="#991b1b" />
+                    <stop offset="50%" stopColor="#d97706" />
+                    <stop offset="100%" stopColor="#b45309" />
                   </linearGradient>
                 </defs>
               </svg>

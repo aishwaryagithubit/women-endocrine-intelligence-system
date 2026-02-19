@@ -5,31 +5,31 @@
 @tailwind utilities;
 
 :root {
-  /* Feminine Premium Palette - Soft Pinks, Lavenders, Teals */
+  /* Logo-Inspired Premium Palette: Deep Reds, Warm Creams, and Soft Golds */
   --font-sans: 'Outfit', sans-serif;
   --font-display: 'Playfair Display', serif;
 
-  --background: 330 30% 98%;      /* Very soft pinkish white */
-  --foreground: 260 20% 20%;      /* Dark purple-grey text */
+  --background: 30 40% 98%;      /* Warm Cream/Beige background from logo */
+  --foreground: 0 50% 15%;       /* Deepest Maroon/Black for text */
   
-  --primary: 330 60% 70%;         /* Soft Rose */
+  --primary: 0 60% 40%;          /* Deep Elegant Red from the logo lady and drops */
   --primary-foreground: 0 0% 100%;
   
-  --secondary: 170 50% 92%;       /* Very light teal background */
-  --secondary-foreground: 175 40% 30%; /* Darker teal text */
+  --secondary: 20 30% 90%;       /* Soft Tan/Sand */
+  --secondary-foreground: 0 40% 25%;
   
-  --muted: 260 20% 96%;           /* Light lavender grey */
-  --muted-foreground: 260 10% 50%;
+  --muted: 30 20% 94%;           /* Muted warm grey */
+  --muted-foreground: 0 20% 45%;
   
-  --accent: 270 40% 90%;          /* Soft Lavender */
-  --accent-foreground: 270 50% 30%;
+  --accent: 40 50% 85%;          /* Soft Gold/Champagne accent */
+  --accent-foreground: 0 50% 30%;
   
-  --destructive: 0 70% 60%;
+  --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 98%;
   
-  --border: 330 20% 90%;
-  --input: 330 20% 92%;
-  --ring: 330 60% 70%;
+  --border: 0 20% 88%;
+  --input: 0 20% 90%;
+  --ring: 0 60% 40%;
   
   --radius: 1rem;
 }
@@ -39,8 +39,8 @@
     @apply bg-background text-foreground antialiased selection:bg-primary/20;
     font-family: var(--font-sans);
     background-image: 
-      radial-gradient(circle at 10% 10%, rgba(255, 228, 230, 0.4) 0%, transparent 40%),
-      radial-gradient(circle at 90% 90%, rgba(230, 255, 250, 0.4) 0%, transparent 40%);
+      radial-gradient(circle at 10% 10%, rgba(180, 40, 40, 0.05) 0%, transparent 40%),
+      radial-gradient(circle at 90% 90%, rgba(212, 175, 55, 0.05) 0%, transparent 40%);
     background-attachment: fixed;
   }
 
@@ -60,6 +60,6 @@
   }
   
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-purple-500 to-teal-500;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-red-700 via-red-500 to-amber-600;
   }
 }

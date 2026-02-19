@@ -175,12 +175,12 @@ export default function Dashboard() {
             <AreaChart data={chartData}>
               <defs>
                 <linearGradient id="colorMood" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#db2777" stopOpacity={0.2}/>
-                  <stop offset="95%" stopColor="#db2777" stopOpacity={0}/>
+                  <stop offset="5%" stopColor="#991b1b" stopOpacity={0.2}/>
+                  <stop offset="95%" stopColor="#991b1b" stopOpacity={0}/>
                 </linearGradient>
                 <linearGradient id="colorEnergy" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#14b8a6" stopOpacity={0.2}/>
-                  <stop offset="95%" stopColor="#14b8a6" stopOpacity={0}/>
+                  <stop offset="5%" stopColor="#d97706" stopOpacity={0.2}/>
+                  <stop offset="95%" stopColor="#d97706" stopOpacity={0}/>
                 </linearGradient>
               </defs>
               <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.1} />
@@ -189,8 +189,8 @@ export default function Dashboard() {
               <Tooltip 
                 contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
               />
-              <Area type="monotone" dataKey="mood" stroke="#db2777" strokeWidth={3} fillOpacity={1} fill="url(#colorMood)" />
-              <Area type="monotone" dataKey="energy" stroke="#14b8a6" strokeWidth={3} fillOpacity={1} fill="url(#colorEnergy)" />
+              <Area type="monotone" dataKey="mood" stroke="#991b1b" strokeWidth={3} fillOpacity={1} fill="url(#colorMood)" />
+              <Area type="monotone" dataKey="energy" stroke="#d97706" strokeWidth={3} fillOpacity={1} fill="url(#colorEnergy)" />
             </AreaChart>
           </ResponsiveContainer>
         </div>
