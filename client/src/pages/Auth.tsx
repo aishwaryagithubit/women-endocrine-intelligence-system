@@ -11,6 +11,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useI18n } from "@/hooks/use-i18n";
+import logoImg from "@assets/WhatsApp_Image_2026-02-19_at_3.51.24_PM_1771495804296.jpeg";
 
 const authSchema = z.object({
   username: z.string().min(3, "Username must be at least 3 characters"),
@@ -55,9 +56,9 @@ export default function Auth() {
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="w-20 h-20 bg-white rounded-full mx-auto mb-6 flex items-center justify-center shadow-xl shadow-primary/20"
+            className="w-32 h-32 bg-white rounded-full mx-auto mb-6 flex items-center justify-center shadow-xl shadow-primary/20 overflow-hidden border-4 border-white"
           >
-            <Heart className="w-10 h-10 text-primary fill-primary" />
+            <img src={logoImg} alt="Endora Logo" className="w-full h-full object-cover" />
           </motion.div>
           <h1 className="font-display text-4xl md:text-5xl font-bold mb-4 text-foreground">
             {language === 'en' ? 'Endora' : 'एन्डोरा'}

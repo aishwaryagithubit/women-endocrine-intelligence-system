@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { LayoutDashboard, Calendar, BookOpen, MessageCircle, Stethoscope, Settings, LogOut, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import logoImg from "@assets/WhatsApp_Image_2026-02-19_at_3.51.24_PM_1771495804296.jpeg";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
@@ -27,7 +28,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       {isMobileMenuOpen && (
         <div className="fixed inset-0 z-50 bg-background/95 backdrop-blur-sm lg:hidden p-6 flex flex-col">
           <div className="flex justify-between items-center mb-8">
-            <h2 className="text-2xl font-display font-bold text-primary">Endora</h2>
+            <div className="flex items-center gap-3">
+              <img src={logoImg} alt="Endora" className="w-10 h-10 rounded-full object-cover border border-primary/20 shadow-sm" />
+              <h2 className="text-2xl font-display font-bold text-primary">Endora</h2>
+            </div>
             <button onClick={() => setIsMobileMenuOpen(false)} className="p-2">
               <X className="w-6 h-6" />
             </button>
@@ -50,7 +54,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       {/* Desktop Sidebar */}
       <aside className="hidden lg:flex flex-col w-64 glass-card border-r border-border/50 sticky top-0 h-screen p-6">
         <div className="flex items-center gap-3 mb-10 px-2">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-primary to-purple-400"></div>
+          <img src={logoImg} alt="Endora" className="w-10 h-10 rounded-full object-cover border border-primary/20 shadow-sm" />
           <h1 className="text-2xl font-display font-bold text-foreground">Endora</h1>
         </div>
 
@@ -95,7 +99,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <main className="flex-1 min-w-0 flex flex-col">
         <div className="lg:hidden p-4 flex justify-between items-center glass-card m-4 rounded-xl sticky top-4 z-40">
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-primary to-purple-400"></div>
+            <img src={logoImg} alt="Endora" className="w-8 h-8 rounded-full object-cover border border-primary/20 shadow-sm" />
             <h1 className="text-xl font-display font-bold text-foreground">Endora</h1>
           </div>
           <button onClick={() => setIsMobileMenuOpen(true)} className="p-2">
@@ -118,7 +122,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <footer className="mt-auto border-t border-border/50 bg-white/30 backdrop-blur-sm py-8 px-6">
           <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-primary to-purple-400"></div>
+              <img src={logoImg} alt="Endora" className="w-8 h-8 rounded-full object-cover border border-primary/20 shadow-sm" />
               <span className="font-display font-bold text-lg">Endora</span>
             </div>
             
