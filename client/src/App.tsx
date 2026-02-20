@@ -12,6 +12,8 @@ import Dashboard from "@/pages/Dashboard";
 import Tracking from "@/pages/Tracking";
 import Learning from "@/pages/Learning";
 import Chat from "@/pages/Chat";
+import Rewards from "@/pages/Rewards";
+import History from "@/pages/History";
 import Doctors from "@/pages/Doctors";
 import Settings from "@/pages/Settings";
 import NotFound from "@/pages/not-found";
@@ -72,6 +74,14 @@ function Router() {
 
       <Route path="/chat">
         <ProtectedRoute component={Chat} />
+      </Route>
+
+      <Route path="/rewards">
+        <ProtectedRoute component={Rewards} />
+      </Route>
+
+      <Route path="/history">
+        <ProtectedRoute component={History} />
       </Route>
 
       <Route path="/doctors">

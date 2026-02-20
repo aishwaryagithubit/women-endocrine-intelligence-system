@@ -2,7 +2,7 @@ import { useLocation, Link } from "wouter";
 import { useAuth } from "@/hooks/use-auth";
 import { useI18n } from "@/hooks/use-i18n";
 import { motion } from "framer-motion";
-import { LayoutDashboard, Calendar, BookOpen, MessageCircle, Stethoscope, Settings, LogOut, Menu, X } from "lucide-react";
+import { LayoutDashboard, Calendar, BookOpen, MessageCircle, Stethoscope, Settings, LogOut, Menu, X, Gift, History } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import logoImg from "@assets/WhatsApp_Image_2026-02-19_at_3.51.24_PM_1771495804296.jpeg";
@@ -18,6 +18,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     { href: "/tracking", label: "tracking", icon: Calendar },
     { href: "/learning", label: "learning", icon: BookOpen },
     { href: "/chat", label: "chat", icon: MessageCircle },
+    { href: "/rewards", label: "rewards", icon: Gift },
+    { href: "/history", label: "history", icon: History },
     { href: "/doctors", label: "doctors", icon: Stethoscope },
     { href: "/settings", label: "settings", icon: Settings },
   ];
