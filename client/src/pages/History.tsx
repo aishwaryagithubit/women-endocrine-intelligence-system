@@ -37,7 +37,7 @@ export default function History() {
           monthShort: 'Feb',
           label: 'daily_checkin',
           metrics: [
-             { icon: Activity, label: 'hormonal_stability', value: 'medium', points: 71, detail: 'Hormonal Health Insight' }
+             { icon: Activity, label: 'hormonal_stability', value: 'medium', color: 'text-amber-600', bg: 'bg-amber-50' }
           ]
         },
         {

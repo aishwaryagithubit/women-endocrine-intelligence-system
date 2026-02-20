@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { LayoutDashboard, Calendar, BookOpen, MessageCircle, Stethoscope, Settings, LogOut, Menu, X, Gift, History } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import logoImg from "@assets/WhatsApp_Image_2026-02-19_at_3.51.24_PM_1771495804296.jpeg";
+import logoImg from "@assets/WhatsApp_Image_2026-02-19_at_4.07.30_PM_1771566306100.jpeg";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
@@ -31,7 +31,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div className="fixed inset-0 z-50 bg-background/95 backdrop-blur-sm lg:hidden p-6 flex flex-col">
           <div className="flex justify-between items-center mb-8">
             <div className="flex items-center gap-3">
-              <img src={logoImg} alt="Endora" className="w-10 h-10 rounded-full object-cover border border-primary/20 shadow-sm" />
+              <img src={logoImg} alt="Endora" className="w-16 h-16 rounded-full object-contain border border-primary/20 shadow-sm" />
               <h2 className="text-2xl font-display font-bold text-primary">Endora</h2>
             </div>
             <button onClick={() => setIsMobileMenuOpen(false)} className="p-2">
@@ -55,9 +55,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
       {/* Desktop Sidebar */}
       <aside className="hidden lg:flex flex-col w-64 glass-card border-r border-border/50 sticky top-0 h-screen p-6">
-        <div className="flex items-center gap-3 mb-10 px-2">
-          <img src={logoImg} alt="Endora" className="w-10 h-10 rounded-full object-cover border border-primary/20 shadow-sm" />
-          <h1 className="text-2xl font-display font-bold text-foreground">Endora</h1>
+        <div className="flex flex-col items-center gap-3 mb-10 px-2">
+          <img src={logoImg} alt="Endora" className="w-24 h-24 rounded-full object-contain border border-primary/20 shadow-sm" />
+          <h1 className="text-2xl font-display font-bold text-foreground text-center">Endora</h1>
         </div>
 
         <nav className="flex-1 flex flex-col gap-2">
@@ -79,7 +79,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
         <div className="mt-auto pt-6 border-t border-border/50">
           <div className="flex items-center justify-between px-2 mb-4">
-             <span className="text-sm font-medium text-muted-foreground">Language</span>
+             <span className="text-sm font-medium text-muted-foreground">{t('language')}</span>
              <button 
                onClick={() => setLanguage(language === 'en' ? 'ne' : 'en')}
                className="text-xs font-bold bg-secondary px-2 py-1 rounded-md text-secondary-foreground"
@@ -92,7 +92,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             className="flex items-center gap-3 px-4 py-3 w-full rounded-xl text-muted-foreground hover:bg-destructive/10 hover:text-destructive transition-colors"
           >
             <LogOut className="w-5 h-5" />
-            <span className="font-medium">Sign Out</span>
+            <span className="font-medium">{t('logout')}</span>
           </button>
         </div>
       </aside>
@@ -100,8 +100,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       {/* Main Content */}
       <main className="flex-1 min-w-0 flex flex-col">
         <div className="lg:hidden p-4 flex justify-between items-center glass-card m-4 rounded-xl sticky top-4 z-40">
-          <div className="flex items-center gap-2">
-            <img src={logoImg} alt="Endora" className="w-8 h-8 rounded-full object-cover border border-primary/20 shadow-sm" />
+          <div className="flex items-center gap-3">
+            <img src={logoImg} alt="Endora" className="w-12 h-12 rounded-full object-contain border border-primary/20 shadow-sm" />
             <h1 className="text-xl font-display font-bold text-foreground">Endora</h1>
           </div>
           <button onClick={() => setIsMobileMenuOpen(true)} className="p-2">
