@@ -37,7 +37,7 @@ const modules = [
     duration_ne: "६ मिनेट पढाइ",
     category: "Wellness",
     category_ne: "कल्याण",
-    image: "https://images.unsplash.com/photo-1544367563-12123d8965cd?w=800&auto=format&fit=crop&q=60"
+    image: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=800&auto=format&fit=crop&q=60"
   },
   {
     id: "4",
@@ -49,7 +49,7 @@ const modules = [
     duration_ne: "४ मिनेट पढाइ",
     category: "Sleep",
     category_ne: "निद्रा",
-    image: "https://images.unsplash.com/photo-1511295742362-92c96b504802?w=800&auto=format&fit=crop&q=60"
+    image: "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=800&auto=format&fit=crop&q=60"
   }
 ];
 
