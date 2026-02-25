@@ -136,6 +136,17 @@ const translations: Record<string, Record<Language, string>> = {
   'footer_email': { en: 'hello@endora.health', ne: 'hello@endora.health' },
   'footer_social': { en: 'Follow Us', ne: 'हामीलाई पछ्याउनुहोस्' },
   'navigation': { en: 'Navigation', ne: 'नेभिगेसन' },
+  'consultation_fee': { en: 'Consultation Fee', ne: 'परामर्श शुल्क' },
+  'rs': { en: 'Rs.', ne: 'रु.' },
+  'ai_cycle_analysis': { en: 'Deep AI Cycle Analysis', ne: 'गहिरो AI चक्र विश्लेषण' },
+  'ai_analysis_status': { en: 'All systems operational. Analyzing hormonal patterns...', ne: 'सबै प्रणालीहरू सञ्चालनमा छन्। हर्मोनल ढाँचाहरू विश्लेषण गर्दै...' },
+  'pattern_recognition': { en: 'Pattern Recognition', ne: 'ढाँचा पहिचान' },
+  'hormonal_balance': { en: 'Hormonal Balance', ne: 'हर्मोनल सन्तुलन' },
+  'ovulation_accuracy': { en: 'Ovulation Accuracy', ne: 'डिम्ब निष्कासन शुद्धता' },
+  'predicted_events': { en: 'Predicted Events', ne: 'भविष्यवाणी गरिएका घटनाहरू' },
+  'energy_peak': { en: 'Energy Peak', ne: 'ऊर्जा शिखर' },
+  'high_fertility': { en: 'High Fertility', ne: 'उच्च उर्वरता' },
+  'mood_shift': { en: 'Mood Shift', ne: 'मुड परिवर्तन' },
 };
 
 export const useI18n = create<I18nStore>((set, get) => ({

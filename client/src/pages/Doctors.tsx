@@ -12,7 +12,8 @@ const doctors = [
     rating: 4.9,
     reviews: 124,
     image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=800&auto=format&fit=crop&q=60",
-    contact: "+977 9800000001"
+    contact: "+977 9800000001",
+    fee: 1500
   },
   {
     id: 2,
@@ -22,7 +23,8 @@ const doctors = [
     rating: 4.8,
     reviews: 89,
     image: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=800&auto=format&fit=crop&q=60",
-    contact: "+977 9800000002"
+    contact: "+977 9800000002",
+    fee: 2000
   },
   {
     id: 3,
@@ -32,7 +34,8 @@ const doctors = [
     rating: 5.0,
     reviews: 210,
     image: "https://images.unsplash.com/photo-1614608682850-e0d6ed316d47?w=800&auto=format&fit=crop&q=60",
-    contact: "+977 9800000003"
+    contact: "+977 9800000003",
+    fee: 2500
   }
 ];
 
@@ -77,6 +80,9 @@ export default function Doctors() {
                   <span className="font-bold">{doctor.rating}</span>
                   <span className="text-muted-foreground">({doctor.reviews} {t('reviews')})</span>
                 </div>
+              </div>
+              <div className="text-sm font-semibold text-primary flex items-center gap-1">
+                {t('consultation_fee')}: {t('rs')} {doctor.fee}
               </div>
             </div>
 

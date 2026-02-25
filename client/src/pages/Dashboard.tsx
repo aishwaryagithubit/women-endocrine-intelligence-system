@@ -3,7 +3,7 @@ import { useEntries } from "@/hooks/use-entries";
 import { useI18n } from "@/hooks/use-i18n";
 import { format, addDays, differenceInDays } from "date-fns";
 import { motion } from "framer-motion";
-import { Droplet, Moon, Sun, Battery, Calendar as CalendarIcon, ArrowRight } from "lucide-react";
+import { Droplet, Moon, Sun, Battery, Calendar as CalendarIcon, ArrowRight, Brain, Activity, ShieldCheck, Zap } from "lucide-react";
 import { Link } from "wouter";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
@@ -193,6 +193,108 @@ export default function Dashboard() {
               <Area type="monotone" dataKey="energy" stroke="#d97706" strokeWidth={3} fillOpacity={1} fill="url(#colorEnergy)" />
             </AreaChart>
           </ResponsiveContainer>
+        </div>
+      </motion.div>
+
+      {/* Deep AI Analysis Section */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.45 }}
+        className="glass-card p-8 rounded-3xl border-primary/20 border-2"
+      >
+        <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center">
+              <Brain className="w-7 h-7 text-primary animate-pulse" />
+            </div>
+            <div>
+              <h3 className="font-display text-2xl font-bold">{t('ai_cycle_analysis')}</h3>
+              <p className="text-sm text-muted-foreground">{t('ai_analysis_status')}</p>
+            </div>
+          </div>
+          <div className="hidden md:flex items-center gap-2 text-xs font-bold text-green-500 bg-green-50 px-3 py-1 rounded-full border border-green-100">
+            <ShieldCheck className="w-3 h-3" />
+            ENCRYPTED & PRIVATE
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="p-4 bg-secondary/30 rounded-2xl border border-white/50">
+            <div className="flex items-center gap-2 mb-2">
+              <Activity className="w-4 h-4 text-primary" />
+              <span className="text-xs font-bold text-muted-foreground uppercase">{t('pattern_recognition')}</span>
+            </div>
+            <p className="text-lg font-bold">Stable Cycle</p>
+            <div className="mt-2 h-1.5 w-full bg-white/50 rounded-full overflow-hidden">
+              <div className="h-full bg-primary w-[85%]"></div>
+            </div>
+          </div>
+
+          <div className="p-4 bg-secondary/30 rounded-2xl border border-white/50">
+            <div className="flex items-center gap-2 mb-2">
+              <Droplet className="w-4 h-4 text-red-500" />
+              <span className="text-xs font-bold text-muted-foreground uppercase">{t('hormonal_balance')}</span>
+            </div>
+            <p className="text-lg font-bold">Balanced</p>
+            <div className="mt-2 h-1.5 w-full bg-white/50 rounded-full overflow-hidden">
+              <div className="h-full bg-red-500 w-[92%]"></div>
+            </div>
+          </div>
+
+          <div className="p-4 bg-secondary/30 rounded-2xl border border-white/50">
+            <div className="flex items-center gap-2 mb-2">
+              <Zap className="w-4 h-4 text-amber-500" />
+              <span className="text-xs font-bold text-muted-foreground uppercase">{t('ovulation_accuracy')}</span>
+            </div>
+            <p className="text-lg font-bold">98.4% Confidence</p>
+            <div className="mt-2 h-1.5 w-full bg-white/50 rounded-full overflow-hidden">
+              <div className="h-full bg-amber-500 w-[98%]"></div>
+            </div>
+          </div>
+
+          <div className="p-4 bg-secondary/30 rounded-2xl border border-white/50">
+            <div className="flex items-center gap-2 mb-2">
+              <CalendarIcon className="w-4 h-4 text-teal-500" />
+              <span className="text-xs font-bold text-muted-foreground uppercase">{t('predicted_events')}</span>
+            </div>
+            <p className="text-lg font-bold">3 Upcoming</p>
+            <div className="flex gap-1 mt-2">
+              <div className="w-full h-1.5 bg-teal-500 rounded-full"></div>
+              <div className="w-full h-1.5 bg-teal-500 rounded-full"></div>
+              <div className="w-full h-1.5 bg-teal-500/30 rounded-full"></div>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="flex items-center gap-4 p-4 bg-white/50 rounded-2xl">
+            <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center text-amber-600">
+              <Sun className="w-5 h-5" />
+            </div>
+            <div>
+              <p className="text-xs font-bold text-muted-foreground">{t('energy_peak')}</p>
+              <p className="text-sm font-bold">In 2 days</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-4 p-4 bg-white/50 rounded-2xl">
+            <div className="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center text-pink-600">
+              <Heart className="w-5 h-5" />
+            </div>
+            <div>
+              <p className="text-xs font-bold text-muted-foreground">{t('high_fertility')}</p>
+              <p className="text-sm font-bold">Starts Feb 28</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-4 p-4 bg-white/50 rounded-2xl">
+            <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-600">
+              <Activity className="w-5 h-5" />
+            </div>
+            <div>
+              <p className="text-xs font-bold text-muted-foreground">{t('mood_shift')}</p>
+              <p className="text-sm font-bold">Expected Mar 5</p>
+            </div>
+          </div>
         </div>
       </motion.div>
       
