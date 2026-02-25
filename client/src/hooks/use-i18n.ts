@@ -122,6 +122,20 @@ const translations: Record<string, Record<Language, string>> = {
   'medium': { en: 'Medium', ne: 'मध्यम' },
   'high': { en: 'High', ne: 'उच्च' },
   'balanced': { en: 'Balanced', ne: 'सन्तुलित' },
+  'data_privacy': { en: 'Data Privacy & Consent', ne: 'डाटा गोपनीयता र सहमति' },
+  'privacy_desc': { en: 'Manage how your health data is stored and used.', ne: 'तपाईंको स्वास्थ्य डाटा कसरी भण्डारण र प्रयोग गरिन्छ प्रबन्ध गर्नुहोस्।' },
+  'anonymous_usage': { en: 'Anonymous Usage Data', ne: 'अज्ञात प्रयोग डाटा' },
+  'anonymous_desc': { en: 'Help us improve by sharing non-identifiable usage patterns.', ne: 'गैर-पहिचान योग्य प्रयोग ढाँचाहरू साझा गरेर हामीलाई सुधार गर्न मद्दत गर्नुहोस्।' },
+  'data_encryption': { en: 'End-to-End Encryption', ne: 'एन्ड-टु-एन्ड इन्क्रिप्सन' },
+  'encryption_desc': { en: 'Your health entries are encrypted locally on your device.', ne: 'तपाईंको स्वास्थ्य प्रविष्टिहरू तपाईंको उपकरणमा स्थानीय रूपमा इन्क्रिप्ट गरिएका छन्।' },
+  'download_data': { en: 'Download My Data', ne: 'मेरो डाटा डाउनलोड गर्नुहोस्' },
+  'delete_account': { en: 'Delete Account & Data', ne: 'खाता र डाटा मेटाउनुहोस्' },
+  'footer_contact': { en: 'Contact Us', ne: 'हामीलाई सम्पर्क गर्नुहोस्' },
+  'footer_address': { en: 'Kathmandu, Nepal', ne: 'काठमाडौं, नेपाल' },
+  'footer_phone': { en: '+977 1 4XXXXXX', ne: '+९७७ १ ४XXXXXX' },
+  'footer_email': { en: 'hello@endora.health', ne: 'hello@endora.health' },
+  'footer_social': { en: 'Follow Us', ne: 'हामीलाई पछ्याउनुहोस्' },
+  'navigation': { en: 'Navigation', ne: 'नेभिगेसन' },
 };
 
 export const useI18n = create<I18nStore>((set, get) => ({

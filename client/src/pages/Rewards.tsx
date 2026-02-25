@@ -89,7 +89,7 @@ export default function Rewards() {
               <Gift className="w-10 h-10 text-primary" />
             </div>
             <p className="text-sm font-medium text-muted-foreground">{t('redeem_desc')}</p>
-            <Button className="w-full rounded-2xl py-6 font-bold" disabled={points < target}>
+            <Button className="w-full rounded-2xl py-6 font-bold bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/30 disabled:opacity-50 disabled:shadow-none transition-all" disabled={points < target}>
               {t('redeem_button')}
               <span className="ml-2 bg-white/20 px-2 py-0.5 rounded-full text-xs">1</span>
             </Button>

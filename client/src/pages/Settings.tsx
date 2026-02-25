@@ -104,6 +104,43 @@ export default function Settings() {
             <Switch defaultChecked />
           </div>
         </motion.div>
+        {/* Data Privacy Section */}
+        <motion.div 
+           initial={{ opacity: 0, y: 10 }}
+           animate={{ opacity: 1, y: 0 }}
+           transition={{ delay: 0.3 }}
+           className="glass-card p-6 rounded-2xl"
+        >
+          <h2 className="text-xl font-bold mb-2">{t('data_privacy')}</h2>
+          <p className="text-sm text-muted-foreground mb-6">{t('privacy_desc')}</p>
+          
+          <div className="space-y-6">
+            <div className="flex items-center justify-between">
+              <div className="space-y-0.5">
+                <Label className="text-base">{t('anonymous_usage')}</Label>
+                <p className="text-sm text-muted-foreground">{t('anonymous_desc')}</p>
+              </div>
+              <Switch defaultChecked />
+            </div>
+
+            <div className="flex items-center justify-between">
+              <div className="space-y-0.5">
+                <Label className="text-base">{t('data_encryption')}</Label>
+                <p className="text-sm text-muted-foreground">{t('encryption_desc')}</p>
+              </div>
+              <div className="text-primary text-xs font-bold bg-primary/10 px-2 py-1 rounded">ACTIVE</div>
+            </div>
+
+            <div className="pt-4 flex flex-col gap-3">
+              <Button variant="outline" className="w-full justify-start rounded-xl border-dashed">
+                {t('download_data')}
+              </Button>
+              <Button variant="ghost" className="w-full justify-start rounded-xl text-destructive hover:bg-destructive/10">
+                {t('delete_account')}
+              </Button>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </div>
   );

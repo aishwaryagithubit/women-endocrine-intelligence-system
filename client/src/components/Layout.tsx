@@ -121,20 +121,43 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </div>
 
         {/* Footer */}
-        <footer className="mt-auto border-t border-border/50 bg-white/30 backdrop-blur-sm py-8 px-6">
-          <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="flex items-center gap-2">
-              <img src={logoImg} alt="Endora" className="w-8 h-8 rounded-full object-cover border border-primary/20 shadow-sm" />
-              <span className="font-display font-bold text-lg">Endora</span>
-            </div>
-            
-            <p className="text-sm text-muted-foreground">
-              {t('footer_rights')}
-            </p>
+        <footer className="mt-auto border-t border-border/50 bg-white/30 backdrop-blur-sm py-12 px-6">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
+              <div className="space-y-4">
+                <h3 className="font-display font-bold text-lg text-primary">{t('footer_contact')}</h3>
+                <div className="space-y-2 text-sm text-muted-foreground">
+                  <p>{t('footer_address')}</p>
+                  <p>{t('footer_phone')}</p>
+                  <p>{t('footer_email')}</p>
+                </div>
+              </div>
 
-            <div className="flex gap-6 text-sm font-medium text-muted-foreground">
-              <a href="#" className="hover:text-primary transition-colors">{t('footer_privacy')}</a>
-              <a href="#" className="hover:text-primary transition-colors">{t('footer_terms')}</a>
+              <div className="space-y-4">
+                <h3 className="font-display font-bold text-lg text-primary">{t('navigation')}</h3>
+                <nav className="flex flex-col gap-2 text-sm text-muted-foreground">
+                  <Link href="/dashboard" className="hover:text-primary transition-colors">{t('dashboard')}</Link>
+                  <Link href="/learning" className="hover:text-primary transition-colors">{t('learning')}</Link>
+                  <Link href="/doctors" className="hover:text-primary transition-colors">{t('doctors')}</Link>
+                </nav>
+              </div>
+
+              <div className="space-y-4">
+                <h3 className="font-display font-bold text-lg text-primary">{t('footer_social')}</h3>
+                <div className="flex gap-4">
+                  <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:text-primary cursor-pointer transition-colors">FB</div>
+                  <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:text-primary cursor-pointer transition-colors">IG</div>
+                  <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:text-primary cursor-pointer transition-colors">TW</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="pt-8 border-t border-border/20 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted-foreground">
+              <p>{t('footer_rights')}</p>
+              <div className="flex gap-6 font-medium">
+                <a href="#" className="hover:text-primary transition-colors">{t('footer_privacy')}</a>
+                <a href="#" className="hover:text-primary transition-colors">{t('footer_terms')}</a>
+              </div>
             </div>
           </div>
         </footer>
