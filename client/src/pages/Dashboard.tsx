@@ -3,7 +3,7 @@ import { useEntries } from "@/hooks/use-entries";
 import { useI18n } from "@/hooks/use-i18n";
 import { format, addDays, differenceInDays } from "date-fns";
 import { motion } from "framer-motion";
-import { Droplet, Moon, Sun, Battery, Calendar as CalendarIcon, ArrowRight, Brain, Activity, ShieldCheck, Zap } from "lucide-react";
+import { Droplet, Moon, Sun, Battery, Calendar as CalendarIcon, ArrowRight, Brain, Activity, ShieldCheck, Zap, Heart } from "lucide-react";
 import { Link } from "wouter";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
