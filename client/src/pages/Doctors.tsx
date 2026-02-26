@@ -13,7 +13,7 @@ const doctors = [
     reviews: 124,
     image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=800&auto=format&fit=crop&q=60",
     contact: "+977 9800000001",
-    fee: 1500
+    fee: 400
   },
   {
     id: 2,
@@ -24,7 +24,7 @@ const doctors = [
     reviews: 89,
     image: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=800&auto=format&fit=crop&q=60",
     contact: "+977 9800000002",
-    fee: 2000
+    fee: 500
   },
   {
     id: 3,
@@ -35,7 +35,7 @@ const doctors = [
     reviews: 210,
     image: "https://images.unsplash.com/photo-1614608682850-e0d6ed316d47?w=800&auto=format&fit=crop&q=60",
     contact: "+977 9800000003",
-    fee: 2500
+    fee: 700
   }
 ];
 

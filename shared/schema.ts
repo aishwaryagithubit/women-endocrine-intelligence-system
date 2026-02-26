@@ -9,6 +9,7 @@ export const users = pgTable("users", {
   username: text("username").notNull(), // Email in this case
   password: text("password").notNull(), // Hashed
   name: text("name").notNull(),
+  age: integer("age"),
   language: text("language").default("en"),
   // Onboarding Data
   cycleLength: integer("cycle_length"),

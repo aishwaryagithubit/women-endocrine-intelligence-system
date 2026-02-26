@@ -147,6 +147,7 @@ const translations: Record<string, Record<Language, string>> = {
   'energy_peak': { en: 'Energy Peak', ne: 'ऊर्जा शिखर' },
   'high_fertility': { en: 'High Fertility', ne: 'उच्च उर्वरता' },
   'mood_shift': { en: 'Mood Shift', ne: 'मुड परिवर्तन' },
+  'age': { en: 'Age', ne: 'उमेर' },
 };
 
 export const useI18n = create<I18nStore>((set, get) => ({
