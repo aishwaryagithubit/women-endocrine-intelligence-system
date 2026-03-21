@@ -43,8 +43,12 @@ export const api = {
         cycleLength: 28,
         periodLength: 5,
         lastPeriodStart: null,
+        periodRegularity: null,
+        healthGoal: null,
+        birthControl: null,
         onboardingCompleted: false,
-        language: "en" 
+        language: "en",
+        age: userData.age ?? null
       };
       
       users.push(newUser);

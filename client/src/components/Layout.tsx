@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { LayoutDashboard, Calendar, BookOpen, MessageCircle, Stethoscope, Settings, LogOut, Menu, X, Gift, History } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import logoImg from "@assets/WhatsApp_Image_2026-02-19_at_4.07.30_PM_1771566306100.jpeg";
+import logoImg from "@assets/endora_logo.jpeg";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();

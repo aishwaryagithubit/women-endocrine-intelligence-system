@@ -11,7 +11,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useI18n } from "@/hooks/use-i18n";
-import logoImg from "@assets/WhatsApp_Image_2026-02-19_at_4.07.30_PM_1771566306100.jpeg";
+import logoImg from "@assets/endora_logo.jpeg";
 
 const authSchema = z.object({
   username: z.string().min(3, "Username must be at least 3 characters"),

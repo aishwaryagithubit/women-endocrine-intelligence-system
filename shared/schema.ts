@@ -15,6 +15,9 @@ export const users = pgTable("users", {
   cycleLength: integer("cycle_length"),
   periodLength: integer("period_length"),
   lastPeriodStart: timestamp("last_period_start"),
+  periodRegularity: text("period_regularity"), // regular, irregular
+  healthGoal: text("health_goal"), // conceive, avoid, tracking
+  birthControl: text("birth_control"), // yes, no, method
   onboardingCompleted: boolean("onboarding_completed").default(false),
 });
 

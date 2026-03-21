@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Send, Bot, User as UserIcon, Loader2 } from "lucide-react";
+import { Send, Bot, User as UserIcon, Loader2, Mic, MicOff } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useI18n } from "@/hooks/use-i18n";
@@ -16,6 +16,9 @@ export default function Chat() {
   const { t } = useI18n();
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isListening, setIsListening] = useState(false);
+  const [speechSupported, setSpeechSupported] = useState(true);
+  const recognitionRef = useRef<any>(null);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
@@ -42,6 +45,56 @@ export default function Chat() {
   };
 
   useEffect(scrollToBottom, [messages]);
+
+  useEffect(() => {
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      setSpeechSupported(false);
+      return;
+    }
+
+    const recognition = new SpeechRecognition();
+    recognition.lang = "en-US";
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    recognition.onresult = (event: any) => {
+      const transcript = event.results[0]?.[0]?.transcript || "";
+      setInput((current) => (current ? `${current} ${transcript}` : transcript));
+    };
+
+    recognition.onerror = () => {
+      setIsListening(false);
+    };
+
+    recognition.onend = () => {
+      setIsListening(false);
+    };
+
+    recognitionRef.current = recognition;
+
+    return () => {
+      recognition.stop();
+      recognitionRef.current = null;
+    };
+  }, []);
+
+  const toggleVoiceInput = () => {
+    if (!recognitionRef.current) return;
+
+    if (isListening) {
+      recognitionRef.current.stop();
+      setIsListening(false);
+      return;
+    }
+
+    try {
+      recognitionRef.current.start();
+      setIsListening(true);
+    } catch {
+      setIsListening(false);
+    }
+  };
 
   const handleSend = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -120,6 +173,16 @@ export default function Chat() {
               placeholder={t('chat_placeholder')}
               className="flex-1 rounded-xl border-border bg-white/50"
             />
+            <Button
+              type="button"
+              onClick={toggleVoiceInput}
+              disabled={!speechSupported}
+              className="rounded-xl w-12 px-0"
+              variant={isListening ? "secondary" : "ghost"}
+              aria-label={isListening ? "Stop voice input" : "Start voice input"}
+            >
+              {isListening ? <MicOff className="w-5 h-5" /> : <Mic className="w-5 h-5" />}
+            </Button>
             <Button 
               type="submit" 
               disabled={isLoading || !input.trim()}
@@ -128,6 +191,9 @@ export default function Chat() {
               <Send className="w-5 h-5" />
             </Button>
           </form>
+          {!speechSupported && (
+            <p className="mt-2 text-xs text-destructive">Microphone chat is not supported in this browser.</p>
+          )}
         </div>
       </div>
     </div>
