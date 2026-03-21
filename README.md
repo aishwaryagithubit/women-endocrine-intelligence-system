@@ -77,7 +77,7 @@ The Women Endocrine Intelligence System is a comprehensive digital health platfo
    npm run dev
    ```
 
-5. Open your browser to `http://localhost:3000`
+5. Open your browser to `http://localhost:5000`
 
 ## Usage
 
