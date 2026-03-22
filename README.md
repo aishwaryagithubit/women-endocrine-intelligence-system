@@ -87,9 +87,7 @@ The Women Endocrine Intelligence System is a comprehensive digital health platfo
 4. **Consultation**: Find doctors and get professional advice
 5. **Chat**: Ask questions to the AI assistant
 
-## Contributing
 
-We welcome contributions! Please read our contributing guidelines before submitting pull requests.
 
 ## License
 
